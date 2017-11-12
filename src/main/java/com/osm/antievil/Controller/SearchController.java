@@ -16,4 +16,5 @@ public class SearchController {
     public String hello(){
         return "hello world";
     }
+
 }
