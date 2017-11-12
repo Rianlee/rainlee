@@ -14,4 +14,9 @@ public class SearchController {
     public String hello(){
         return "hello world";
     }
+
+    @GetMapping(value = "/world")
+    public String world(){
+        return "hello airxiao";
+    }
 }
