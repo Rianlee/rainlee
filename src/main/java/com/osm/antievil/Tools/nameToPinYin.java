@@ -27,10 +27,12 @@ public class nameToPinYin {
         List<Company> companyList = companyRepository.findAll();
         for (Company c:companyList
              ) {
-            System.out.println( c.getName() + " - " +getPinyin(c.getName()));
-            Company company = companyRepository.getOne(c.getId());
-            company.setPinyinname(getPinyin(c.getName()));
-            companyRepository.save(company);
+            if(c.getPinyinname().equals("")){  //如果拼音名为空才转换
+                System.out.println( c.getName() + " - " +getPinyin(c.getName()));
+                Company company = companyRepository.getOne(c.getId());
+                company.setPinyinname(getPinyin(c.getName()));
+                companyRepository.save(company);
+            }
         }
     }
 }
