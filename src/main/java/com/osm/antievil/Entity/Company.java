@@ -17,6 +17,7 @@ public class Company {
     private Integer Id;
 
     private String name;
+    private String pinyinname;
     private String address;
     private Integer pid;
     private Integer cid;
@@ -37,6 +38,14 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPinyinname() {
+        return pinyinname;
+    }
+
+    public void setPinyinname(String pinyinname) {
+        this.pinyinname = pinyinname;
     }
 
     public String getAddress() {

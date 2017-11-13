@@ -27,7 +27,10 @@ public class PinyinQuery {
         StringBuilder stringBuilder = new StringBuilder();
         char[] words = s.toCharArray();
         for (char c:words) {
-            stringBuilder.append(getSinglePinyin(c) + " ");
+            stringBuilder.append(getSinglePinyin(c));
+            if(!getSinglePinyin(c).equals("")){
+                stringBuilder.append(" ");
+            }
 //            System.out.println(getSinglePinyin(c));
         }
 
@@ -40,13 +43,16 @@ public class PinyinQuery {
      * @return
      */
     public static String getSinglePinyin(char zhWord){
+        String pinyin[] = new String[0];
         if (zhWord=='\0'){  // 判定字符是否为空
-            zhWord = ' ';
+            return "";
+        }
+        if (zhWord=='(' || zhWord==')' || zhWord=='/'){
+            return "";
         }
         HanyuPinyinOutputFormat hanyuPinyinOutputFormat = new HanyuPinyinOutputFormat();
         hanyuPinyinOutputFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         hanyuPinyinOutputFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
-        String pinyin[] = new String[0];
         try {
             pinyin= PinyinHelper.toHanyuPinyinStringArray(zhWord,hanyuPinyinOutputFormat);
         } catch (BadHanyuPinyinOutputFormatCombination badHanyuPinyinOutputFormatCombination) {
@@ -55,7 +61,7 @@ public class PinyinQuery {
         return  pinyin[0];
     }
 
-//    public static void main(String[] args) {
-//        System.out.println(getPinyin("陈伟豪"));
-//    }
+    public static void main(String[] args) {
+        System.out.println(getPinyin("陈(伟豪"));
+    }
 }
