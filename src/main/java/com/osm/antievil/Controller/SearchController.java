@@ -27,12 +27,10 @@ public class SearchController {
         return companyRepository.findAll();
     }
 
-    @GetMapping(value = "findByName")
-    public List<Company> girlListByName(@RequestParam("name") String name){
+    @GetMapping(value = "/findByName")
+    public List<Company> companyListByName(@RequestParam("name") String name){
         System.out.println(name);
-        List<Company> c=companyRepository.findByNameLike(name);
-        //System.out.println(a.get(0).getName());
-        return c;
+        return companyRepository.findByNameLike(name);
     }
 
     @GetMapping(value = "test")

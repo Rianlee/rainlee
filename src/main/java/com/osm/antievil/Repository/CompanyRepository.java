@@ -2,10 +2,12 @@ package com.osm.antievil.Repository;
 
 import com.osm.antievil.Entity.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company,Integer> {
     //通过公司名称来查询
+    @Query("select c from Company c where name like %?1%")
     public List<Company> findByNameLike(String name);
 }
