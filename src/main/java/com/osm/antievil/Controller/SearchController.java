@@ -64,8 +64,6 @@ public class SearchController {
                 returnResult.add(c);
             }
         }
-
-
         return returnResult;
     }
 
