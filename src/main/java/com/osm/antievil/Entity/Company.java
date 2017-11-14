@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * @create 2017 - 11 - 13 13:23
  */
 @Entity
-public class Company {
+public class Company implements Comparable<Company> {
 
     @Id
     @GeneratedValue
@@ -86,5 +86,14 @@ public class Company {
 
     public void setN(Double n) {
         this.n = n;
+    }
+
+    @Override
+    public int compareTo(Company o) {
+        if (this.getN() > o.getN()){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }

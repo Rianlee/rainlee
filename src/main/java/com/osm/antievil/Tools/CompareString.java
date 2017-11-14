@@ -66,11 +66,11 @@ public class CompareString {
         return 1 - (float) compare(str, target) / Math.max(str.length(), target.length());
     }
 
-    public static void main(String[] args)
-    {
-        CompareString compareString = new CompareString();
-        String str = "aaaaabbbbbaaaaabbbbb";
-        String target = "abababababababababab";
-        System.out.println("similarityRatio=" + compareString.getSimilarityRatio(str, target));
-    }
+//    public static void main(String[] args)
+//    {
+//        CompareString compareString = new CompareString();
+//        String str = "aaaaabbbbbaaaaabbbbb";
+//        String target = "abababababababababab";
+//        System.out.println("similarityRatio=" + compareString.getSimilarityRatio(str, target));
+//    }
 }
