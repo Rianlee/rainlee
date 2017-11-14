@@ -57,13 +57,13 @@ public class SearchController {
         //用输入的name去比较
         //相似度大于0.7,就存下来
         for (Company c:allResult) {
-
             float result= compareString.getSimilarityRatio(newName, c.getPinyinname());
             if(result>0.3){
                 System.out.println(c.getName()+"---"+result);
                 returnResult.add(c);
             }
         }
+
 
         return returnResult;
     }
