@@ -25,13 +25,17 @@ public class nameToPinYin {
     @GetMapping(value = "/tools/topinyin")
     public void run(){
         List<Company> companyList = companyRepository.findAll();
-        for (Company c:companyList
-             ) {
-            if(c.getPinyinname().equals("")){  //如果拼音名为空才转换
+        for (Company c:companyList) {
+            if( c.getPinyinname()==null || c.getPinyinname().equals("")){  //如果拼音名为空才转换
+               // System.out.println(c.getPinyinname());
                 System.out.println( c.getName() + " - " +getPinyin(c.getName()));
                 Company company = companyRepository.getOne(c.getId());
+                //将填充数据库拼音
                 company.setPinyinname(getPinyin(c.getName()));
                 companyRepository.save(company);
+                //清空数据库拼音
+//                company.setPinyinname("");
+//                companyRepository.save(company);
             }
         }
     }

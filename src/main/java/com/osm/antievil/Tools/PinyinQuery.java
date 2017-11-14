@@ -7,6 +7,8 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import java.util.Arrays;
+
 
 /**
  * @author wellCh4n
@@ -29,7 +31,7 @@ public class PinyinQuery {
         for (char c:words) {
             stringBuilder.append(getSinglePinyin(c));
             if(!getSinglePinyin(c).equals("")){
-                stringBuilder.append(" ");
+                stringBuilder.append("");
             }
 //            System.out.println(getSinglePinyin(c));
         }
@@ -61,7 +63,39 @@ public class PinyinQuery {
         return  pinyin[0];
     }
 
+    /**
+     * 判断字符是不是中文
+     * @param c 待检测的字符
+     * @return 返回真假
+     */
+    public static boolean isChinese(char c) {
+        return c >= 0x4E00 &&  c <= 0x9FA5;// 根据字节码判断
+    }
+
+    /**
+     * 将中文和拼音混合的字符变成拼音
+     * @param str 待转换的字符串
+     * @return
+     */
+    public static String changeToPinyin(String str){
+        String[] oldarr=str.split("");
+        for (int i=0;i<oldarr.length;i++){
+            for(char c:oldarr[i].toCharArray()) {
+                if (isChinese(c)){ //判断是否是中文
+                    oldarr[i]=getSinglePinyin(c); //中文替换成拼音
+                    //System.out.println(oldarr[i]+getSinglePinyin(c));
+                }
+            }
+        }
+        StringBuffer newStr = new StringBuffer();
+        for (String string : oldarr) {
+            newStr.append(string);
+        }
+        //System.out.println(newStr);
+        return newStr.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(getPinyin("陈(伟豪"));
+        System.out.println(changeToPinyin("de科"));
     }
 }
