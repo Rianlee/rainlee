@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import static com.osm.antievil.Tools.PinyinQuery.changeToPinyin;
 
@@ -67,6 +68,27 @@ public class SearchController {
 
         return returnResult;
     }
+
+    @GetMapping(value = "/s")
+    public List<Company> companyListS(@RequestParam("name") String name){
+        name = changeToPinyin(name);
+//        System.out.println(name);
+        CompareString compareString = new CompareString();
+
+        List<Company> companyListAll = companyRepository.findAll();
+        List<Company> companyListResult = new ArrayList<Company>();
+        for (Company c:companyListAll) {
+            double n = compareString.getSimilarityRatio(name,c.getPinyinname());
+            c.setN(n);
+            if(c.getN() >= 0.3){
+                System.out.println(c.getName() + "--" + c.getN());
+                companyListResult.add(c);
+            }
+        }
+        Collections.sort(companyListResult);
+        return  companyListResult;
+    }
+
 
 
     @GetMapping(value = "test")
